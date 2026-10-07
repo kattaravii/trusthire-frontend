@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background: #0b0f19;
+  color: #f1f5f9;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ⚠️ FORCES VERTICAL LAYOUT (Navbar on top, Content below) */
+.app-layout {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 🔝 TOP HORIZONTAL NAVBAR */
+.sidebar-container {
+  width: 100% !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background: #111827;
+  border-bottom: 1px solid #1f2937;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.sidebar-title {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+/* 🔄 FORCES OPTIONS SIDE-BY-SIDE (Oka dani pakkana okati) */
+.nav-links-wrapper {
+  display: flex !important;
+  flex-direction: row !important; /* This makes them horizontal */
+  align-items: center !important;
+  justify-content: flex-end;
+  gap: 15px;
+  width: 100%;
+}
+
+/* ✨ BOUNCY NAVBAR BUTTONS */
+.sidebar-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  /* Smooth, bouncy transition added here */
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  margin: 0 !important;
+}
+
+.sidebar-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #38bdf8;
+  /* Moves the button up on hover */
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(56, 189, 248, 0.2);
+}
+
+.sidebar-btn.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  /* Keeps the active tab slightly raised */
+  transform: translateY(-2px);
+}
+
+.sidebar-logout {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.05);
+  color: #fca5a5;
+  font-weight: 600;
+  cursor: pointer;
+  /* Smooth bouncy transition for logout */
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-left: 20px !important;
+  white-space: nowrap;
+}
+
+.sidebar-logout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  /* Moves the logout button up on hover */
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.2);
+}
+
+/* 📄 PAGE CONTENT CENTER (Motham Center lo raavali) */
+.page-container {
+  flex: 1;
+  max-width: 1000px;
+  width: 100%;
+  margin: 40px auto !important; /* 'auto' forces it to the absolute center */
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional Grid layout if you have side-by-side cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 Column centered */
+  gap: 30px;
+  width: 100%;
+}
+
+.page-header {
+  text-align: center; /* Centers your Title and Welcome message */
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.page-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: -0.8px;
+}
+
+.page-subtitle {
+  color: #94a3b8;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* 🎴 MIDNIGHT GLASS CARDS */
+.card {
+  background: #111827;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+  border: 1px solid #1f2937;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.card h3 {
+  color: #f8fafc;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* 🎛️ BUTTONS */
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  padding: 13px 26px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+/* ✨ INPUT FIELDS & DROPDOWNS */
+.input-field, .dark-filter {
+  width: 100%;
+  padding: 14px 18px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.input-field:focus, .dark-filter:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  background: #111827;
+}
+
+/* 📊 UNIFIED DARK TABLES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111827;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table th {
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  padding: 16px;
+  background: #1f2937;
+  border-bottom: 1px solid #374151;
+}
+
+table tr {
+  background: #111827;
+  border-bottom: 1px solid #1f2937;
+}
+
+table td {
+  padding: 16px;
+  color: #f8fafc;
+  font-size: 14px;
+}
