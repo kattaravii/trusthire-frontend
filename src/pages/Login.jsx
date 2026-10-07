@@ -14,8 +14,8 @@ export default function Login() {
         setError('');
 
         try {
-            // Using 127.0.0.1 instead of localhost to prevent the connection bug!
-            const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
+            // Updated to point to the live Render cloud API
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })

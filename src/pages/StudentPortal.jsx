@@ -35,7 +35,7 @@ export default function StudentPortal() {
 
     const fetchMyApplications = async (token) => {
         try {
-            const res = await fetch(`http://127.0.0.1:5000/api/student/my-applications`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const res = await fetch(`https://trusthire-backend-q77g.onrender.com/api/student/my-applications`, { headers: { 'Authorization': `Bearer ${token}` } });
             if (res.ok) setMyApplications(await res.json());
         } catch (err) { console.error("Error fetching applications:", err); }
     };
@@ -50,14 +50,14 @@ export default function StudentPortal() {
 
         const fetchProfileAndJobs = async () => {
             try {
-                const profileRes = await fetch(`http://127.0.0.1:5000/api/student/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const profileRes = await fetch(`https://trusthire-backend-q77g.onrender.com/api/student/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
                 if (profileRes.ok) {
                     const data = await profileRes.json();
                     setStudentData(data);
                     setEditProfile({ fullName: data.full_name || '', universityRollNo: data.university_roll_no || '', mobileNumber: data.mobile_number || '', location: data.location || '', yearOfStudy: data.year_of_study || '3rd Year' });
                 }
 
-                const jobsRes = await fetch(`http://127.0.0.1:5000/api/student/jobs`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const jobsRes = await fetch(`https://trusthire-backend-q77g.onrender.com/api/student/jobs`, { headers: { 'Authorization': `Bearer ${token}` } });
                 if (jobsRes.ok) {
                     const jobsData = await jobsRes.json();
                     setAvailableJobs(jobsData);
@@ -79,12 +79,12 @@ export default function StudentPortal() {
         formData.append('resume', file);
         try {
             setUploadStatus('🧠 Uploading and analyzing file via Groq AI...');
-            const response = await fetch('http://127.0.0.1:5000/api/student/upload-resume', { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/upload-resume', { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
             const data = await response.json();
             if (response.ok) {
                 setUploadStatus('Success! AI Analysis Complete. Check your Career Guidance tab!');
                 setFile(null); 
-                const updatedResponse = await fetch(`http://127.0.0.1:5000/api/student/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const updatedResponse = await fetch(`https://trusthire-backend-q77g.onrender.com/api/student/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
                 if (updatedResponse.ok) setStudentData(await updatedResponse.json());
             } else setUploadStatus(`Error: ${data.error}`);
         } catch (err) { setUploadStatus('Failed to connect to the server.'); }
@@ -95,7 +95,7 @@ export default function StudentPortal() {
         const token = localStorage.getItem('token');
         const fixedCompanyEmail = 'kattaravi321@gmail.com'; 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/apply', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ appliedRole: selectedRole, companyEmail: fixedCompanyEmail }) });
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/apply', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ appliedRole: selectedRole, companyEmail: fixedCompanyEmail }) });
             const data = await response.json();
             if (response.ok) { setApplyStatus('Success! Application sent and emails delivered.'); fetchMyApplications(token); }
             else setApplyStatus(`Error: ${data.error}`);
@@ -106,10 +106,10 @@ export default function StudentPortal() {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/profile', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify(editProfile) });
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/profile', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify(editProfile) });
             if (response.ok) {
                 setProfileMsg('Profile updated successfully! ✅');
-                const updatedResponse = await fetch(`http://127.0.0.1:5000/api/student/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const updatedResponse = await fetch(`https://trusthire-backend-q77g.onrender.com/api/student/profile`, { headers: { 'Authorization': `Bearer ${token}` } });
                 if (updatedResponse.ok) setStudentData(await updatedResponse.json());
             } else setProfileMsg('Failed to update profile. (Check database columns)');
         } catch (err) { setProfileMsg('Server error. Please try again.'); }
@@ -121,7 +121,7 @@ export default function StudentPortal() {
         setShowTcuAuthModal(true); 
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/tcu/send-otp', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ email: studentData.email }) });
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/tcu/send-otp', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ email: studentData.email }) });
             if (response.ok) setTcuAuthMsg('OTP sent to your email.');
             else setTcuAuthMsg('Failed to send OTP. Try again.');
         } catch (err) { setTcuAuthMsg('Network error.'); }
@@ -132,7 +132,7 @@ export default function StudentPortal() {
         setTcuAuthMsg('Verifying...');
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/tcu/verify-otp', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ otp: tcuOtp, mobile: editProfile.mobileNumber || studentData.mobile_number || '', year: editProfile.yearOfStudy || studentData.year_of_study || '' }) });
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/tcu/verify-otp', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ otp: tcuOtp, mobile: editProfile.mobileNumber || studentData.mobile_number || '', year: editProfile.yearOfStudy || studentData.year_of_study || '' }) });
             if (response.ok) {
                 setStudentData({ ...studentData, tcu_verified: true });
                 setShowTcuAuthModal(false); setTcuOtp(''); setTcuAuthMsg('');
@@ -158,7 +158,7 @@ export default function StudentPortal() {
             }
             const geminiHistory = chatMessages.slice(1).map(msg => ({ role: msg.role === 'bot' ? 'model' : 'user', parts: [{ text: msg.text }] }));
 
-            const res = await fetch('http://127.0.0.1:5000/api/chatbot/ask', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ message: apiMessage, context: studentContext, history: geminiHistory }) });
+            const res = await fetch('https://trusthire-backend-q77g.onrender.com/api/chatbot/ask', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ message: apiMessage, context: studentContext, history: geminiHistory }) });
             const data = await res.json();
             if (res.ok) setChatMessages(prev => [...prev, { role: 'bot', text: data.reply }]);
             else setChatMessages(prev => [...prev, { role: 'bot', text: data.error || 'Oops, something went wrong.' }]);
@@ -169,7 +169,7 @@ export default function StudentPortal() {
     const handleEmailChat = async () => {
         setEmailStatus('sending');
         try {
-            const res = await fetch('http://127.0.0.1:5000/api/chatbot/email-chat', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }, body: JSON.stringify({ chatHistory: chatMessages }) });
+            const res = await fetch('https://trusthire-backend-q77g.onrender.com/api/chatbot/email-chat', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }, body: JSON.stringify({ chatHistory: chatMessages }) });
             if (res.ok) setEmailStatus('success'); else setEmailStatus('error');
         } catch (err) { setEmailStatus('error'); }
         setTimeout(() => setEmailStatus(''), 3000);
@@ -178,7 +178,7 @@ export default function StudentPortal() {
     const handleRequestDsaSheet = async () => {
         setDsaEmailStatus('Sending...');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/send-dsa-sheet', { method: 'POST', headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/send-dsa-sheet', { method: 'POST', headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
             if (response.ok) { setDsaEmailStatus('Success! Check your email inbox. ✅'); setTimeout(() => { setIsDsaModalOpen(false); setDsaEmailStatus(''); }, 2000); }
             else setDsaEmailStatus('Failed to send email. ❌');
         } catch (err) { setDsaEmailStatus('Network error. ❌'); }
@@ -311,7 +311,7 @@ export default function StudentPortal() {
                                         onClick={async () => {
                                             setIsPrepLoading(true);
                                             try {
-                                                const res = await fetch('http://127.0.0.1:5000/api/student/generate-prep', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }});
+                                                const res = await fetch('https://trusthire-backend-q77g.onrender.com/api/student/generate-prep', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }});
                                                 const data = await res.json();
                                                 // Check that data successfully returned the arrays before setting
                                                 if (res.ok && data.important_topics) {

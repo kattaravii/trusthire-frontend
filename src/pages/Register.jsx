@@ -50,7 +50,8 @@ export default function Register() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/auth/register', {
+            // Updated to point to the live Render cloud API
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -84,7 +85,8 @@ export default function Register() {
         setSuccess('');
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/auth/verify-company-otp', {
+            // Updated to point to the live Render cloud API
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/auth/verify-company-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: emailForOtp, otp })
@@ -168,7 +170,7 @@ export default function Register() {
                             <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#475569' }}>Full Name</label>
                             <input 
                                 type="text" value={name} onChange={(e) => setName(e.target.value)}
-                                placeholder="e.g., Ravi Katta"
+                                placeholder="e.g., xyz abc"
                                 className="input-field"
                                 required 
                             />
@@ -178,7 +180,7 @@ export default function Register() {
                             <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#475569' }}>Email Address</label>
                             <input 
                                 type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                                placeholder={selectedRole === 'company' ? 'hr@company.com' : 'kattaravi321@gmail.com'}
+                                placeholder={selectedRole === 'company' ? 'hr@company.com' : 'xyz@example.com'}
                                 className="input-field"
                                 required 
                             />
@@ -200,7 +202,7 @@ export default function Register() {
                                     <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#475569', fontSize: '0.9em' }}>University Name</label>
                                     <input 
                                         type="text" value={university} onChange={(e) => setUniversity(e.target.value)}
-                                        placeholder="e.g., PP Savani University"
+                                        placeholder="e.g., University"
                                         className="input-field"
                                         required 
                                     />

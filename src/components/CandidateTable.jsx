@@ -18,7 +18,7 @@ export default function CandidateTable() {
                 }
 
                 // Add the token to the request headers to pass the backend bouncer
-                const response = await fetch('http://localhost:5000/api/company/students', {
+                const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/students', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

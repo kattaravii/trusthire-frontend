@@ -49,7 +49,7 @@ export default function CompanyPortal() {
     const fetchApplications = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/company/applications', {
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/applications', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -62,7 +62,7 @@ export default function CompanyPortal() {
     const fetchPostedJobs = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/company/jobs', {
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/jobs', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -76,7 +76,7 @@ export default function CompanyPortal() {
         if (!window.confirm("Are you sure you want to delete this received application/resume?")) return;
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://127.0.0.1:5000/api/company/applications/${appId}`, {
+            const res = await fetch(`https://trusthire-backend-q77g.onrender.com/api/company/applications/${appId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -94,7 +94,7 @@ export default function CompanyPortal() {
         
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://127.0.0.1:5000/api/company/jobs/${jobId}`, {
+            const res = await fetch(`https://trusthire-backend-q77g.onrender.com/api/company/jobs/${jobId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -120,7 +120,7 @@ export default function CompanyPortal() {
         const token = localStorage.getItem('token');
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/company/jobs', {
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/jobs', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ export default function CompanyPortal() {
         
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/company/send-mail', {
+            const response = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/send-mail', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -525,7 +525,7 @@ export default function CompanyPortal() {
                                     e.preventDefault();
                                     setRidMessage('Verifying...');
                                     try {
-                                        const res = await fetch('http://127.0.0.1:5000/api/company/verify-rid', {
+                                        const res = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/verify-rid', {
                                             method: 'POST',
                                             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
                                             body: JSON.stringify({ rid: inputRid })
@@ -566,7 +566,7 @@ export default function CompanyPortal() {
                                     <button 
                                         onClick={async () => {
                                             setAdminTestMsg('Sending to Admin Team...');
-                                            const res = await fetch('http://127.0.0.1:5000/api/company/test-trigger-admin-rid', {
+                                            const res = await fetch('https://trusthire-backend-q77g.onrender.com/api/company/test-trigger-admin-rid', {
                                                 method: 'POST',
                                                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                                             });
